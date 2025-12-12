@@ -238,3 +238,86 @@ input[type=range]{
   input[type=range]{width:80px}
   .icon-btn{width:38px;height:38px}
 }
+
+/* --------------------- */
+/*   إصلاحات الريسبونس   */
+/* --------------------- */
+
+/* جعل كل شيء داخل التوب بار مرن ومتمدد */
+.topbar {
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* تصغير الأزرار حسب الشاشة */
+@media (max-width: 600px) {
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .title {
+    font-size: 15px;
+    padding: 3px 8px;
+  }
+}
+
+/* ضبط أدوات الأسفل */
+.toolbar {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tools {
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* كل بلوك أدوات ياخذ مكان مضبوط */
+.control {
+  flex-wrap: wrap;
+  padding: 6px;
+  justify-content: center;
+}
+
+/* جعل الـ range يتكيف */
+input[type=range] {
+  max-width: 100px;
+  width: 30vw;
+}
+
+/* مساحة الرسم تتمدّد تلقائيًا */
+.canvas-area {
+  min-height: 50vh;
+}
+
+/* جعل اللوحة الجانبية تعمل بكل الشاشات */
+.layers-flyout {
+  max-width: 90%;
+  right: 10px;
+}
+
+/* في الشاشات الصغيرة */
+@media (max-width: 480px) {
+  .layers-flyout {
+    width: 85%;
+    right: 7px;
+  }
+}
+
+/* === توحيد حجم وستايل أزرار القلم، الممحاة، الدلو، التراجع، التقديم، الحذف === */
+
+.control .icon-btn {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 12px !important;
+  background: var(--control-bg) !important;
+  box-shadow: var(--shadow) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: var(--accent);
+  font-size: 18px;
+}
