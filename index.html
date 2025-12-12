@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>موقع رسم - طبقات منبثقة</title>
+  
+
+  <!-- رابط أول ملف CSS -->
+  <link rel="stylesheet" href="style.css">
+  <!-- رابط ملف JS -->
+
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div class="top-left">
+        <button class="icon-btn" id="homeBtn" title="الرئيسية"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+        <div class="title">Nai print</div>
+      </div>
+
+      <div class="top-right">
+        <!-- زر الأدوات (أعلى) -->
+        <button class="icon-btn" id="shapesTopBtn" title="أدوات الأشكال">⋯</button>
+        <div id="saveBtn" class="menu-item"></div>
+
+        <!-- زر الطبقات (يفتح اللوحة المنبثقة من اليمين) -->
+        <button class="icon-btn" id="layersToggle" title="الطبقات"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers-icon lucide-layers"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg></button>
+      </div>
+    </div>
+  
+
+    <div class="main">
+      <div class="canvas-area">
+        <div class="canvas-wrap" id="canvasWrap">
+          <!-- layer canvases يضافون هنا -->
+          <canvas id="shapePreview"></canvas>
+        </div>
+
+        <div class="toolbar">
+          <div class="tools">
+            <div class="control" role="toolbar">
+              <button class="icon-btn" id="brushBtn" title="قلم"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pen-line-icon lucide-pen-line"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></button>
+              <button class="icon-btn" id="eraserBtn" title="ممحاة"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eraser-icon lucide-eraser"><path d="M21 21H8a2 2 0 0 1-1.42-.587l-3.994-3.999a2 2 0 0 1 0-2.828l10-10a2 2 0 0 1 2.829 0l5.999 6a2 2 0 0 1 0 2.828L12.834 21"/><path d="m5.082 11.09 8.828 8.828"/></svg></button>
+              <button class="icon-btn" id="bucketBtn" title="دلو"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paint-bucket-icon lucide-paint-bucket"><path d="M11 7 6 2"/><path d="M18.992 12H2.041"/><path d="M21.145 18.38A3.34 3.34 0 0 1 20 16.5a3.3 3.3 0 0 1-1.145 1.88c-.575.46-.855 1.02-.855 1.595A2 2 0 0 0 20 22a2 2 0 0 0 2-2.025c0-.58-.285-1.13-.855-1.595"/><path d="m8.5 4.5 2.148-2.148a1.205 1.205 0 0 1 1.704 0l7.296 7.296a1.205 1.205 0 0 1 0 1.704l-7.592 7.592a3.615 3.615 0 0 1-5.112 0l-3.888-3.888a3.615 3.615 0 0 1 0-5.112L5.67 7.33"/></svg></button>
+
+              <div style="display:flex;flex-direction:column;align-items:center">
+                <input type="color" id="colorPicker" class="color-pill" value="#ffffff"/>
+                <div style="font-size:11px;color:#444;margin-top:-4px">لون</div>
+              </div>
+
+              <div style="display:flex;flex-direction:column;align-items:center;margin-inline-start:6px">
+                <input type="range" id="sizeRange" min="1" max="80" value="6" />
+                <div style="font-size:8px;color:#444;margin-top:-9px">حجم</div>
+                
+                <div style="display:flex;flex-direction:column;align-items:center;margin-inline-start:6px">
+  <input type="range" id="brushAlpha" min="0.05" max="1" step="0.05" value="1"/>
+  <div style="font-size:8px;color:#444;margin-top:-9px">شفافية قلم</div>
+</div>
+              </div>
+            </div>
+
+            <div class="control">
+              <button class="icon-btn" id="undoBtn" title="تراجع">⤺</button>
+              <button class="icon-btn" id="redoBtn" title="إعادة">⤻</button>
+              <button class="icon-btn" id="clearBtn" title="مسح"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+            </div>
+          </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <!-- اللوحة المنبثقة للطبقات (C: narrow slide-in from right) -->
+      <div class="layers-flyout" id="layersFlyout" aria-hidden="true">
+        <div class="layers-header">
+          <div style="font-weight:700">الطبقات</div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button id="addLayerBtn" class="small-btn" title="إضافة">+</button>
+            <button id="closeLayersBtn" class="small-btn" title="إغلاق">×</button>
+          </div>
+          
+        </div>
+        <div class="layers-list" id="layersList"></div>
+        <div style="display:flex;gap:6px;justify-content:space-between">
+          <button id="raiseBtn" class="small-btn" title="رفع الطبقة">↓ خفض</button>
+          <button id="lowerBtn" class="small-btn" title="خفض الطبقة">↑ رفع</button>
+          <button id="deleteBtn" class="small-btn" title="حذف الطبقة"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy-x-icon lucide-copy-x"><line x1="12" x2="18" y1="12" y2="18"/><line x1="12" x2="18" y1="18" y2="12"/><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg> حذف</button>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;margin-inline-start:6px">
+  <input type="range" id="layerAlpha" min="0" max="1" step="0.05" value="1"/>
+  <div style="font-size:8px;color:#444;margin-top:-9px">شفافية طبقة</div>
+</div>
+      </div>
+    </div>
+  </div>
+  <script src="script4.js"></script>
+</body>
+</html>

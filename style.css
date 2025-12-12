@@ -1,0 +1,240 @@
+    :root{
+  --bg:#03040a;
+  --control-bg: rgba(10,10,20,0.9);
+  --panel-bg: rgba(10,10,30,0.2);
+  --accent:#00e5ff;
+  --layer-panel-bg: rgba(10,10,30,0.88);
+  --shadow: 0 8px 30px rgba(0,229,255,0.2);
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:#e7f4ff;
+}
+
+.app{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  padding:10px;
+  box-sizing:border-box;
+}
+
+/* Top bar */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1px;
+  padding:3px 3px;
+}
+.top-left,.top-right{
+  display:flex;
+  gap:1px;
+  align-items:center;
+}
+.title{
+  font-size:17px;
+  color:var(--accent);
+  padding:4px 10px;
+  border-radius:12px;
+  background:rgba(0,0,0,0.6);
+  box-shadow:var(--shadow);
+}
+.icon-btn{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  background:var(--control-bg);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:var(--shadow);
+  border:none;
+  cursor:pointer;
+  color:var(--accent);
+  font-weight:700;
+  font-size:18px;
+}
+
+/* Main area */
+.main{
+  display:flex;
+  gap:8px;
+  flex:1;
+  align-items:stretch;
+  position:relative;
+}
+.canvas-area{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.canvas-wrap{
+  position:relative;
+  flex:1;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(180deg,#0a0b14 0%, #0a0b14 40%, #03040a 100%);
+  box-shadow:0 0 15px var(--accent) inset;
+}
+.layer-canvas{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  touch-action:none;
+}
+
+/* Layers flyout */
+.layers-flyout{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:160px;
+  max-height:70vh;
+  background:var(--layer-panel-bg);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  transform: translateX(110%);
+  transition: transform 260ms ease;
+  opacity:0;
+  z-index:1200;
+  backdrop-filter: blur(6px);
+  display:flex;
+  flex-direction:column;
+  padding:8px;
+  gap:8px;
+}
+.layers-flyout.open{
+  transform: translateX(0);
+  opacity:1;
+}
+.layers-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:6px;
+  color:#e7f4ff;
+}
+.layers-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  overflow:auto;
+  padding-right:4px;
+}
+.layer-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px;
+  border-radius:8px;
+  background:rgba(0,10,30,0.5);
+  cursor:pointer;
+  justify-content:space-between;
+}
+.layer-item.active{
+  outline:2px solid var(--accent);
+  background:rgba(0,229,255,0.1);
+}
+.layer-thumb{
+  width:44px;
+  height:30px;
+  border-radius:6px;
+  background:#0a0b14;
+  flex-shrink:0;
+  overflow:hidden;
+  border:1px solid rgba(0,229,255,0.1);
+}
+.layer-name{
+  font-size:13px;
+  text-align:right;
+  flex:1;
+  padding-right:6px;
+}
+.layer-actions, .small-btn{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:6px;
+  border-radius:8px;
+  background:#0a0b14;
+  border:1px solid rgba(0,229,255,0.2);
+  font-size:13px;
+  color:#e7f4ff;
+  cursor:pointer;
+}
+
+/* Toolbar */
+.toolbar{
+  display:flex;
+  gap:0px;
+  align-items:center;
+  justify-content:space-between;
+  padding:0px;
+}
+.tools{
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+.control{
+  background:var(--control-bg);
+  padding:0px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+.color-pill{
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  border:1px solid rgba(0,229,255,0.2);
+}
+
+/* Range */
+input[type=range]{
+  width:110px;
+}
+
+/* Menu popup */
+.menu-popup{
+  position:absolute;
+  bottom:46px;
+  right:0;
+  background:var(--control-bg);
+  padding:8px;
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  display:none;
+  flex-direction:column;
+  gap:6px;
+  width:180px;
+  z-index:50;
+}
+.menu-popup.show{display:flex;}
+
+/* Shape preview */
+#shapePreview{
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:900;
+  pointer-events:none;
+}
+
+/* Responsive */
+@media (max-width:520px){
+  .layers-flyout{width:140px}
+  input[type=range]{width:80px}
+  .icon-btn{width:38px;height:38px}
+}
